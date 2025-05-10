@@ -1,0 +1,7 @@
+{
+  "defaultEmbedColor": "#5865F2",
+  "welcomeChannelId": "your_welcome_channel_id",
+  "xpPerMessage": 15,
+  "xpCooldown": 60000,
+  "levelMultiplier": 100
+}
