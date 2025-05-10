@@ -1,0 +1,25 @@
+{
+  "name": "discord-bot-demo",
+  "version": "1.0.0",
+  "description": "Demo bot for cwk-gen image generation package",
+  "main": "src/bot.js",
+  "scripts": {
+    "start": "node src/bot.js",
+    "deploy": "node src/deploy-commands.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "image",
+    "generator"
+  ],
+  "author": "Khanmanan",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "cwk-gen": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "mongoose": "^8.0.3"
+  }
+}
