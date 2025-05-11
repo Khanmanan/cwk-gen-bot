@@ -1,7 +1,23 @@
 {
   "defaultEmbedColor": "#5865F2",
-  "welcomeChannelId": "your_welcome_channel_id",
-  "xpPerMessage": 15,
-  "xpCooldown": 60000,
+  "welcomeChannelId": "1368508931852472370",
+  "welcomeBackground": "https://cdn.discordapp.com/attachments/1368508931852472370/1371056990155051088/DesignersSupport.png?ex=6821bfd3&is=68206e53&hm=9f0921efbf8d1757ad8f80bf668c9e29137e4788a3dbff3740f6a7bb416c58c8&", 
+  "welcomeColor": "#9147FF",
+  "welcomeTextColor": "#FFFFFF",
+  "welcomeTitle": "Welcome to {server}!",
+  "welcomeMessage": "You are {count}th member!",
+  "welcomeFont": "Arial",
+  "avatarBorderColor": "#FF9900",
+  "welcomePing": false,
+  "welcomePingMessage": "We're excited to have you!",
+  "welcomeWidth": 800,
+  "welcomeHeight": 400,
+  "welcomeBackgroundBlur": 2,
+  "welcomeOverlay": "rgba(0, 0, 0, 0.6)", 
+
+  "xpPerMessage": 10,
+  "rankCardBackground": "https://cdn.discordapp.com/attachments/1368508931852472370/1371056990155051088/DesignersSupport.png?ex=6821bfd3&is=68206e53&hm=9f0921efbf8d1757ad8f80bf668c9e29137e4788a3dbff3740f6a7bb416c58c8&",
+    "profileBackground": "https://cdn.discordapp.com/attachments/1368508931852472370/1371056990155051088/DesignersSupport.png?ex=6821bfd3&is=68206e53&hm=9f0921efbf8d1757ad8f80bf668c9e29137e4788a3dbff3740f6a7bb416c58c8&", 
+  "xpCooldown": 60,
   "levelMultiplier": 100
 }

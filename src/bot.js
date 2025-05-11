@@ -3,6 +3,8 @@ const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
+const Deploy = require('./deploy-commands')
+const { addXP } = require('./utils/xpSystem');
 
 // Initialize Discord client
 const client = new Client({
@@ -44,6 +46,7 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 
+
 // Login to Discord
 client.login(process.env.DISCORD_TOKEN)
   .then(() => console.log('Bot is online!'))
@@ -52,4 +55,30 @@ client.login(process.env.DISCORD_TOKEN)
 // Error handling
 process.on('unhandledRejection', error => {
   console.error('Unhandled promise rejection:', error);
+});
+
+client.on('interactionCreate', async interaction => {
+  if (!interaction.isCommand()) return;
+
+  const command = client.commands.get(interaction.commandName);
+  if (!command) return;
+
+  try {
+    await command.execute(interaction);
+  } catch (error) {
+    console.error(error);
+    await interaction.reply({ 
+      content: 'There was an error executing this command!', 
+      ephemeral: true 
+    });
+  }
+});
+
+client.on('messageCreate', async message => {
+  if (message.author.bot) return;
+  
+  const result = await addXP(message.author.id);
+  if (result?.leveledUp) {
+    message.channel.send(`🎉 ${message.author} leveled up to level ${result.newLevel}!`);
+  }
 });

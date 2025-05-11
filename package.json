@@ -17,8 +17,8 @@
   "author": "Khanmanan",
   "license": "MIT",
   "dependencies": {
+    "cwk-gen": "^1.0.5",
     "discord.js": "^14.13.0",
-    "cwk-gen": "^1.0.3",
     "dotenv": "^16.3.1",
     "mongoose": "^8.0.3"
   }

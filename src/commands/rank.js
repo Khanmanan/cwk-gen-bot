@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { generateRankCard } = require('cwk-gen');
-const { getUserStats } = require('../utils/xpSystem');
+const { getUserStats, getLeaderboard } = require('../utils/xpSystem'); // Fixed missing import
 const config = require('../../config.json');
 
 module.exports = {
@@ -19,9 +19,10 @@ module.exports = {
       const user = interaction.options.getUser('user') || interaction.user;
       const stats = await getUserStats(user.id);
       
-      // Get rank position (simplified - in a real app you'd query the DB)
+      // Get rank position with proper error handling
       const leaderboard = await getLeaderboard(1000);
-      const rank = leaderboard.findIndex(u => u.userId === user.id) + 1 || 1000+;
+      const position = leaderboard.findIndex(u => u.userId === user.id);
+      const rank = position >= 0 ? position + 1 : "1000+";
       
       const buffer = await generateRankCard({
         username: user.username,
@@ -30,7 +31,9 @@ module.exports = {
         xp: stats.xp,
         requiredXp: stats.requiredXP,
         rank,
-        color: config.defaultEmbedColor
+        background: config.rankCardBackground || null, // Add custom background from config
+        color: config.defaultEmbedColor || '#5865F2', // Fallback color
+        progressColor: config.progressColor || '#FFFFFF' // Custom progress bar color
       });
 
       await interaction.editReply({
