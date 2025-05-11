@@ -44,7 +44,7 @@ module.exports = {
         badges,
         background: config.profileBackground || null,
         color: config.defaultEmbedColor || '#5865F2',
-        textColor: config.profileTextColor || '#FFFFFF',
+        textColor: config.profileTextColor || '#2ea8e7',
         badgeStyle: config.badgeStyle || 'circle'
       });
 

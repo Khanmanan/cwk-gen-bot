@@ -33,7 +33,7 @@ module.exports = {
         rank,
         background: config.rankCardBackground || null, // Add custom background from config
         color: config.defaultEmbedColor || '#5865F2', // Fallback color
-        progressColor: config.progressColor || '#FFFFFF' // Custom progress bar color
+        progressColor: config.progressColor || '#ff1b00' // Custom progress bar color
       });
 
       await interaction.editReply({
