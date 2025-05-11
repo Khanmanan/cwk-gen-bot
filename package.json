@@ -17,9 +17,12 @@
   "author": "Khanmanan",
   "license": "MIT",
   "dependencies": {
-    "cwk-gen": "^1.0.5",
+    "cwk-gen": "^1.1.0",
     "discord.js": "^14.13.0",
     "dotenv": "^16.3.1",
-    "mongoose": "^8.0.3"
+    "gif-frames": "^1.0.1",
+    "mongoose": "^8.0.3",
+    "tempy": "^3.1.0",
+    "tmp": "^0.2.3"
   }
 }

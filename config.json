@@ -1,7 +1,17 @@
 {
+  "tempDir": "./temp",
+  "welcomeAnimation": {
+    "maxFileSize": 8000000,
+    "cleanupTempFiles": true,
+    "enabled": true,
+    "background": "./welcome.gif",
+    "frames": 20,
+    "frameDelay": 80,
+    "quality": 15
+  },
   "defaultEmbedColor": "#5865F2",
   "welcomeChannelId": "1368508931852472370",
-  "welcomeBackground": "https://cdn.discordapp.com/attachments/1334969616140861440/1343122254011043911/40d7f6f89bb0f61ac086d775aa484914.jpg?ex=6821a313&is=68205193&hm=25df7f2b822bde31de3671ba2a61291edcc5b17899b7c61d1c71d1c721fc5bff&", 
+  "welcomeBackground": "https://cdn.discordapp.com/attachments/1334969616140861440/1343122254011043911/40d7f6f89bb0f61ac086d775aa484914.jpg?ex=6821a313&is=68205193&hm=25df7f2b822bde31de3671ba2a61291edcc5b17899b7c61d1c71d1c721fc5bff&",
   "welcomeColor": "#ff1b00",
   "welcomeTextColor": "#2ea8e7",
   "welcomeTitle": "Welcome to {server}!",
@@ -13,11 +23,10 @@
   "welcomeWidth": 1200,
   "welcomeHeight": 600,
   "welcomeBackgroundBlur": 0,
-  "welcomeOverlay": "rgba(0, 0, 0, 0.0)", 
-
+  "welcomeOverlay": "rgba(0, 0, 0, 0.0)",
   "xpPerMessage": 10,
   "rankCardBackground": "https://cdn.discordapp.com/attachments/1334969616140861440/1343122254011043911/40d7f6f89bb0f61ac086d775aa484914.jpg?ex=6821a313&is=68205193&hm=25df7f2b822bde31de3671ba2a61291edcc5b17899b7c61d1c71d1c721fc5bff&",
-    "profileBackground": "https://cdn.discordapp.com/attachments/1334969616140861440/1342416947081384018/LadyR-02-21_10-53-30-874.jpg?ex=6821b535&is=682063b5&hm=02ef25fd9b8e6b2c8361e6d379e3f75ca56cdce2ba3f0d4e1c87a2495eb77e5c&" , 
+  "profileBackground": "https://cdn.discordapp.com/attachments/1334969616140861440/1342416947081384018/LadyR-02-21_10-53-30-874.jpg?ex=6821b535&is=682063b5&hm=02ef25fd9b8e6b2c8361e6d379e3f75ca56cdce2ba3f0d4e1c87a2495eb77e5c&",
   "xpCooldown": 60,
   "levelMultiplier": 100
 }
