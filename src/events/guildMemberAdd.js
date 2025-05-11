@@ -1,6 +1,7 @@
 const { generateAnimatedWelcome, generateWelcomeImage } = require('cwk-gen');
 const config = require('../../config.json');
-const { sendGifOrFallback } = require('../../utils/gifUtils');
+const fs = require('fs').promises;
+const path = require('path');
 
 module.exports = {
   name: 'guildMemberAdd',
@@ -23,7 +24,7 @@ module.exports = {
         avatarURL: member.user.displayAvatarURL({ 
           extension: 'png', 
           size: 512,
-          forceStatic: true // Ensures consistent frames
+          forceStatic: true
         }),
         title: config.welcomeTitle?.replace('{server}', member.guild.name) 
                || `WELCOME TO ${member.guild.name.toUpperCase()}`,
@@ -35,7 +36,6 @@ module.exports = {
         width: config.welcomeWidth || 1200,
         height: config.welcomeHeight || 400,
         font: config.welcomeFont || 'Arial',
-        // GIF-specific settings
         frames: config.welcomeAnimation?.frames || 15,
         frameDelay: config.welcomeAnimation?.frameDelay || 100,
         quality: config.welcomeAnimation?.quality || 10
@@ -43,13 +43,34 @@ module.exports = {
 
       let buffer;
       if (config.welcomeAnimation?.enabled) {
-        try {
-          buffer = await generateAnimatedWelcome({
-            ...options,
-            background: "https://cdn.discordapp.com/attachments/1368508967269171210/1371225354005516349/a_49d36b99c9a37e417c17804a14653998.gif?ex=68225ca0&is=68210b20&hm=d152335b04269d098a1258a8151170fe6f91f4ccf0ec7b16c098616b1439b3e9&" 
-          });
-        } catch (gifError) {
-          console.error('GIF generation failed, falling back to static:', gifError);
+        // Try multiple background sources in sequence
+        const backgroundSources = [
+          config.welcomeAnimation?.background, // Primary URL from config
+          './assets/welcome-bg.gif', // Local fallback 1
+          './assets/welcome-bg.png', // Local fallback 2
+        ];
+
+        let lastError = null;
+        
+        for (const background of backgroundSources) {
+          if (!background) continue;
+          
+          try {
+            buffer = await generateAnimatedWelcome({
+              ...options,
+              background: background
+            });
+            lastError = null;
+            break; // Success - exit loop
+          } catch (error) {
+            lastError = error;
+            console.warn(`Failed with background ${background}, trying next option...`);
+          }
+        }
+
+        // If all animated options failed
+        if (lastError) {
+          console.error('All animated options failed, falling back to static:', lastError);
           buffer = await generateWelcomeImage(options);
         }
       } else {
@@ -68,12 +89,16 @@ module.exports = {
 
     } catch (error) {
       console.error('Welcome system error:', error);
-      // Ultimate fallback
-      const welcomeChannel = member.guild.channels.cache.get(config.welcomeChannelId);
-      if (welcomeChannel) {
-        await welcomeChannel.send(
-          `${member.user} just joined! ${config.welcomePingMessage || 'Welcome!'}`
-        ).catch(() => {});
+      // Ultimate fallback - simple text welcome
+      try {
+        const welcomeChannel = member.guild.channels.cache.get(config.welcomeChannelId);
+        if (welcomeChannel) {
+          await welcomeChannel.send(
+            `${member.user} just joined! ${config.welcomePingMessage || 'Welcome!'}`
+          );
+        }
+      } catch (finalError) {
+        console.error('Even the text fallback failed:', finalError);
       }
     }
   }
